@@ -42,6 +42,7 @@ public class StudentData {
             Student student = new Student();
             student.setFullName(fullName[position]);
             student.setNim(nim[position]);
+            student.setPhoto(photo[position]);
 
             list.add(student);
         }

@@ -10,7 +10,7 @@
         android:id="@+id/img_item_photo"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        android:src="@drawable/bn01"/>
+        tools:src="@drawable/bn01"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -43,10 +43,10 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
         final Student mCurrent = mStudentList.get(position);
         holder.studentItemView.setText(mCurrent.getFullName());
         holder.nimItemView.setText(mCurrent.getNim());
-//        Glide.with(holder.itemView.getContext())
-//                .load(mCurrent.getPhoto())
-//                .apply(new RequestOptions().override(55, 55))
-//                .into(holder.photoItemView);
+        Glide.with(holder.itemView.getContext())
+                .load(mCurrent.getPhoto())
+                .apply(new RequestOptions().override(55, 55))
+                .into(holder.photoItemView);
 
         holder.studentItemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +79,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
             super(itemView);
             studentItemView = itemView.findViewById(R.id.student);
             nimItemView = itemView.findViewById(R.id.studentNim);
-//            photoItemView = itemView.findViewById(R.id.studentPhoto);
+            photoItemView = itemView.findViewById(R.id.img_item_photo);
 
         }
     }
