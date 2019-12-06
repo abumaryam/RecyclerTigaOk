@@ -20,12 +20,11 @@ import java.util.ArrayList;
 
 public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentViewHolder>{
 
-    private final ArrayList<Student> mStudentList;
-    private LayoutInflater mInflater;
-
-    public StudentAdapter(ArrayList<Student> mStudentList) {
-
-        this.mStudentList = mStudentList;
+    private final ArrayList<Student> mStudentList = new ArrayList<>();
+    public void setData(ArrayList<Student> items) {
+        mStudentList.clear();
+        mStudentList.addAll(items);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -39,26 +38,8 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
 
 
     @Override
-    public void onBindViewHolder(@NonNull final StudentViewHolder holder, int position) {
-        final Student mCurrent = mStudentList.get(position);
-        holder.studentItemView.setText(mCurrent.getFullName());
-        holder.nimItemView.setText(mCurrent.getNim());
-        Glide.with(holder.itemView.getContext())
-                .load(mCurrent.getPhoto())
-                .apply(new RequestOptions().override(55, 55))
-                .into(holder.photoItemView);
-
-        holder.studentItemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(holder.itemView.getContext(), "Saya Pilih " + mCurrent.getFullName(), Toast.LENGTH_SHORT).show();
-                Intent moveIntent = new Intent(holder.itemView.getContext(),DetailActivity.class);
-                moveIntent.putExtra(DetailActivity.FULL_NAME, mCurrent.getFullName());
-                holder.itemView.getContext().startActivity(moveIntent);
-
-            }
-        });
-
+    public void onBindViewHolder(@NonNull StudentViewHolder holder, int position) {
+        holder.bind(mStudentList.get(position));
     }
 
     @Override
@@ -70,17 +51,17 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
 
         TextView studentItemView;
         TextView nimItemView;
-        ImageView photoItemView;
 
-
-
-
-        public StudentViewHolder(@NonNull View itemView) {
+        StudentViewHolder(@NonNull View itemView) {
             super(itemView);
             studentItemView = itemView.findViewById(R.id.student);
             nimItemView = itemView.findViewById(R.id.studentNim);
-            photoItemView = itemView.findViewById(R.id.img_item_photo);
 
+        }
+
+        void bind(Student students) {
+            studentItemView.setText(students.getFullName());
+            nimItemView.setText(students.getNim());
         }
     }
 }
