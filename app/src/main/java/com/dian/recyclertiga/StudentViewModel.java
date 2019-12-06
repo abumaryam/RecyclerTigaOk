@@ -11,6 +11,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.dian.recyclertiga.model.Student;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,6 +55,26 @@ public class StudentViewModel extends ViewModel {
                 Log.d("onFailure", error.getMessage());
             }
         });
+        RequestParams rParams = new RequestParams();
+        rParams.put("nim", "XX123456");
+        rParams.put("nama_mhs", "Baru Saja");
+        client.post(url, rParams,new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                try {
+                    String result = new String(responseBody);
+                    Log.d("Success",result);
+                } catch (Exception e){
+                    Log.d("Exception", e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.d("onFailure", error.getMessage());
+            }
+        });
+
     }
 
     LiveData<ArrayList<Student>> getStudents() {
